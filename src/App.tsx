@@ -14,34 +14,40 @@ function App() {
 
     let [isValidated, setIsValidated] = useState(true)
 
-    // useEffect(() => {
-    //
-    //     let startValueAsString = localStorage.getItem("startValue")
-    //     let maxValueAsString = localStorage.getItem("maxValue")
-    //     let isDisabledAsString = localStorage.getItem("isDisabled")
-    //
-    //
-    //     if (startValueAsString) {
-    //         let startAsNumber = JSON.parse(startValueAsString)
-    //         setStartValue(startAsNumber)
-    //     }
-    //     if (maxValueAsString) {
-    //         let maxValueAsNumber = JSON.parse(maxValueAsString)
-    //         setMaxValue(maxValueAsNumber)
-    //     }
-    //     debugger
-    //     if (isDisabledAsString) {
-    //
-    //         setIsDisabled(!!(isDisabledAsString))
-    //     }
-    //
-    // }, [])
-    //
-    // useEffect(() => {
-    //     localStorage.setItem("startValue", JSON.stringify(startValue))
-    //     localStorage.setItem("maxValue", JSON.stringify(maxValue))
-    //     localStorage.setItem("isDisabled", JSON.stringify(isDisabled))
-    // }, [startValue, maxValue, isDisabled])
+    useEffect(() => {
+
+        let counterAsString = localStorage.getItem("counter")
+
+        let startValueAsString = localStorage.getItem("startValue")
+        let maxValueAsString = localStorage.getItem("maxValue")
+        let isDisabledAsString = localStorage.getItem("isDisabled")
+
+
+        if (counterAsString) {
+            let counterAsNumber = JSON.parse(counterAsString)
+            setCounter(counterAsNumber)
+        }
+        if (startValueAsString) {
+            let startAsNumber = JSON.parse(startValueAsString)
+            setStartValue(startAsNumber)
+        }
+        if (maxValueAsString) {
+            let maxValueAsNumber = JSON.parse(maxValueAsString)
+            setMaxValue(maxValueAsNumber)
+        }
+
+        if (isDisabledAsString) {
+            setIsDisabled(!(isDisabledAsString))
+        }
+
+    }, [])
+
+    useEffect(() => {
+        localStorage.setItem("counter", JSON.stringify(counter))
+        localStorage.setItem("startValue", JSON.stringify(startValue))
+        localStorage.setItem("maxValue", JSON.stringify(maxValue))
+        localStorage.setItem("isDisabled", JSON.stringify(isDisabled))
+    }, [counter, startValue, maxValue, isDisabled])
 
     const setCounterValueFunc = (value: number) => {
         setCounter(value)
