@@ -7,7 +7,7 @@ type CounterPropsType = {
     startValue: number
     maxValue: number
     isDisabled: boolean
-    setIsDisabledFunc: () => void
+    setIsDisabledFunc: (value: boolean) => void
     isValidated: boolean
 }
 const Counter: React.FC<CounterPropsType> = ({
@@ -22,7 +22,8 @@ const Counter: React.FC<CounterPropsType> = ({
     return (
         <div>
             {
-                isDisabled ? isValidated ? <h2 className={"invalidInput"}>Invalid input!</h2> : <h2>enter values and press 'set'</h2> :
+                isDisabled ? isValidated ? <h2>enter values and press 'set'</h2> :
+                        <h2 className={"invalidInput"}>Invalid input!</h2> :
                     <h1 className={counter === maxValue ? "number-style" : ""}>{counter}</h1>
             }
         </div>

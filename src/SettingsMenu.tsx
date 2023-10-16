@@ -11,10 +11,8 @@ type MenuPropsType = {
     setStartValueFunc: (value: number) => void
     setCounterValueFunc: (value: number) => void
     isDisabled: boolean
-    setIsDisabledFunc: () => void
-    isValidated: boolean
-    isValidatedStartValueField:boolean
-    isValidatedMaxValueField: boolean
+    setIsDisabledFunc: (value: boolean) => void
+    setIsValidatedFunc: (value: boolean) => void
 }
 
 export const SettingsMenu: React.FC<MenuPropsType> = ({
@@ -26,29 +24,50 @@ export const SettingsMenu: React.FC<MenuPropsType> = ({
                                                           setCounterValueFunc,
                                                           setIsDisabledFunc,
                                                           isDisabled,
-                                                          isValidated,
-                                                          isValidatedStartValueField,
-                                                          isValidatedMaxValueField
+                                                          setIsValidatedFunc,
                                                       }) => {
 
+    let [isValidatedStartValueField, setIsValidatedStartValueField] = useState(true)
+    let [isValidatedMaxValueField, setIsValidatedMaxValueField] = useState(true)
 
     const onMaxValueChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        if (Number(e.currentTarget.value) <= startValue || Number(e.currentTarget.value) < 0) {
+            setIsValidatedFunc(false)
+            setIsValidatedMaxValueField(false)
+            setIsDisabledFunc(true)
+        } else {
+            setIsValidatedFunc(true)
+            setIsValidatedMaxValueField(true)
+            setIsDisabledFunc(false)
+        }
         setMaxValueFunc(Number(e.currentTarget.value))
-        setIsDisabledFunc()
     }
     const onStartValueChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        if (Number(e.currentTarget.value) >= maxValue || Number(e.currentTarget.value) < 0) {
+            setIsValidatedFunc(false)
+            setIsValidatedStartValueField(false)
+            setIsDisabledFunc(true)
+        } else {
+            setIsValidatedFunc(true)
+            setIsValidatedStartValueField(true)
+            setIsDisabledFunc(false)
+        }
+
         setStartValueFunc(Number(e.currentTarget.value))
+
     }
     const SetValues = () => {
         setCounterValueFunc(startValue)
-        setIsDisabledFunc()
+        setIsDisabledFunc(false)
     }
 
     return (
         <div className={"wrapper"}>
             <div className={"settingsMenu"}>
-                <h3>max value: <input className={"isValidatedField"} value={maxValue} type={"number"} onChange={onMaxValueChangeHandler}/></h3>
-                <h3>start value: <input value={startValue} type={"number"} onChange={onStartValueChangeHandler}/></h3>
+                <h3>max value: <input className={isValidatedMaxValueField ? "" : "notValidatedField"} value={maxValue}
+                                      type={"number"} onChange={onMaxValueChangeHandler}/></h3>
+                <h3>start value: <input className={isValidatedStartValueField ? "" : "notValidatedField"}
+                                        value={startValue} type={"number"} onChange={onStartValueChangeHandler}/></h3>
             </div>
             <div className={"buttonSection"}>
                 <Button title={"set"} actionFunction={SetValues} isDisabled={isDisabled}/>

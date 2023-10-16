@@ -86,8 +86,11 @@ div {
     color: red;
 }
 
-.isValidatedField{
-
+.notValidatedField{
+    display: inline-block;
+    background-color: lightpink;
+    color: red;
+    border: red 2px solid;
 }
 .isActive{
     opacity: 0.4;

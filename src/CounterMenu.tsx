@@ -10,7 +10,7 @@ type MenuPropsType = {
     maxValue: number
     startValue: number
     isDisabled: boolean
-    setIsDisabledFunc: () => void
+    setIsDisabledFunc: (value: boolean) => void
     isValidated: boolean
 }
 

@@ -14,9 +14,6 @@ function App() {
 
     let [isValidated, setIsValidated] = useState(true)
 
-    let [isValidatedStartValueField, setIsValidatedStartValueField] = useState(true)
-    let [isValidatedMaxValueField, setIsValidatedMaxValueField] = useState(true)
-
     // useEffect(() => {
     //
     //     let startValueAsString = localStorage.getItem("startValue")
@@ -82,19 +79,12 @@ function App() {
         setStartValue(value)
     }
 
-    function setIsDisabledFunc() {
-        setIsDisabled(false)
+    function setIsDisabledFunc(value: boolean) {
+        setIsDisabled(value)
     }
 
-    const Validation = () => {
-        if (startValue < 0){
-            setIsValidated(false)
-            setIsValidatedStartValueField(false)
-        }
-        if (maxValue < 0 && maxValue < startValue){
-            setIsValidated(false)
-            setIsValidatedMaxValueField(false)
-        }
+    function setIsValidatedFunc(value: boolean){
+        setIsValidated(value)
     }
 
     return (
@@ -108,9 +98,7 @@ function App() {
                 setCounterValueFunc={setCounterValueFunc}
                 isDisabled={isDisabled}
                 setIsDisabledFunc={setIsDisabledFunc}
-                isValidated={isValidated}
-                isValidatedStartValueField={isValidatedStartValueField}
-                isValidatedMaxValueField={isValidatedMaxValueField}
+                setIsValidatedFunc={setIsValidatedFunc}
             />
             <CounterMenu
                 counter={counter}
