@@ -107,7 +107,6 @@ function App() {
                 startValue={startValue}
                 maxValue={maxValue}
                 isDisabled={isDisabled}
-                setIsDisabledFunc={setIsDisabledFunc}
                 isValidated={isValidated}
             />
         </div>

@@ -85,13 +85,19 @@ div {
 .invalidInput{
     color: red;
 }
+input{
+    display: inline-block;
+    height: 20px;
+    border-radius: 9px;
+    border: aquamarine 1px solid;
+}
 
 .notValidatedField{
-    display: inline-block;
     background-color: lightpink;
     color: red;
     border: red 2px solid;
 }
+
 .isActive{
     opacity: 0.4;
 }

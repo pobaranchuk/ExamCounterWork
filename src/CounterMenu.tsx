@@ -10,7 +10,6 @@ type MenuPropsType = {
     maxValue: number
     startValue: number
     isDisabled: boolean
-    setIsDisabledFunc: (value: boolean) => void
     isValidated: boolean
 }
 
@@ -20,7 +19,6 @@ const CounterMenu: React.FC<MenuPropsType> = ({
                                                   resetCounter,
                                                   maxValue,
                                                   startValue,
-                                                  setIsDisabledFunc,
                                                   isDisabled,
                                                   isValidated
                                               }) => {
@@ -30,8 +28,7 @@ const CounterMenu: React.FC<MenuPropsType> = ({
     return (
         <div className={"wrapper"}>
             <div className={"counter"}>
-                <Counter counter={counter} startValue={startValue} maxValue={maxValue} isDisabled={isDisabled}
-                         setIsDisabledFunc={setIsDisabledFunc} isValidated={isValidated}/>
+                <Counter counter={counter} maxValue={maxValue} isDisabled={isDisabled} isValidated={isValidated}/>
             </div>
             <div className={"buttonSection"}>
                 <Button title={"inc"} actionFunction={incrementCounter} isDisabled={!incButtonDisabled}/>

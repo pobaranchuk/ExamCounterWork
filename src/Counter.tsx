@@ -4,17 +4,13 @@ import './App.css';
 
 type CounterPropsType = {
     counter: number
-    startValue: number
     maxValue: number
     isDisabled: boolean
-    setIsDisabledFunc: (value: boolean) => void
     isValidated: boolean
 }
 const Counter: React.FC<CounterPropsType> = ({
                                                  counter,
                                                  maxValue,
-                                                 startValue,
-                                                 setIsDisabledFunc,
                                                  isDisabled,
                                                  isValidated
                                              }) => {
@@ -22,9 +18,9 @@ const Counter: React.FC<CounterPropsType> = ({
     return (
         <div>
             {
-                isDisabled ? isValidated ? <h2>enter values and press 'set'</h2> :
-                        <h2 className={"invalidInput"}>Invalid input!</h2> :
-                    <h1 className={counter === maxValue ? "number-style" : ""}>{counter}</h1>
+                isValidated ? isDisabled ? <h2>enter values and press 'set'</h2> :
+                        <h1 className={counter === maxValue ? "number-style" : ""}>{counter}</h1> :
+                    <h2 className={"invalidInput"}>Invalid input!</h2>
             }
         </div>
     );
