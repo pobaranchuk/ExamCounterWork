@@ -1,31 +1,52 @@
 import React, {useEffect, useState} from 'react';
 import './App.css';
-import Counter from "./Counter";
-import Button from "./Button";
 import SettingsMenu from "./SettingsMenu";
 import CounterMenu from "./CounterMenu";
 
 function App() {
 
     let [startValue, setStartValue] = useState(0)
-
     let [maxValue, setMaxValue] = useState(0)
+
     let [counter, setCounter] = useState(0);
 
-    useEffect(() => {
-        let valueAsString = localStorage.getItem("startValue")
-        if (valueAsString) {
-            let valueAsNumber = JSON.parse(valueAsString)
-            setCounter(valueAsNumber)
-        }
-    }, [])
+    let [isDisabled, setIsDisabled] = useState(true)
 
-    useEffect(() => {
-        localStorage.setItem("startValue", JSON.stringify(startValue))
-        localStorage.setItem("maxValue", JSON.stringify(maxValue))
-    }, [startValue, maxValue])
+    let [isValidated, setIsValidated] = useState(true)
 
-    const setCounterValueFunc = (value:number )=>{
+    let [isValidatedStartValueField, setIsValidatedStartValueField] = useState(true)
+    let [isValidatedMaxValueField, setIsValidatedMaxValueField] = useState(true)
+
+    // useEffect(() => {
+    //
+    //     let startValueAsString = localStorage.getItem("startValue")
+    //     let maxValueAsString = localStorage.getItem("maxValue")
+    //     let isDisabledAsString = localStorage.getItem("isDisabled")
+    //
+    //
+    //     if (startValueAsString) {
+    //         let startAsNumber = JSON.parse(startValueAsString)
+    //         setStartValue(startAsNumber)
+    //     }
+    //     if (maxValueAsString) {
+    //         let maxValueAsNumber = JSON.parse(maxValueAsString)
+    //         setMaxValue(maxValueAsNumber)
+    //     }
+    //     debugger
+    //     if (isDisabledAsString) {
+    //
+    //         setIsDisabled(!!(isDisabledAsString))
+    //     }
+    //
+    // }, [])
+    //
+    // useEffect(() => {
+    //     localStorage.setItem("startValue", JSON.stringify(startValue))
+    //     localStorage.setItem("maxValue", JSON.stringify(maxValue))
+    //     localStorage.setItem("isDisabled", JSON.stringify(isDisabled))
+    // }, [startValue, maxValue, isDisabled])
+
+    const setCounterValueFunc = (value: number) => {
         setCounter(value)
     }
     const incrementCounter = () => {
@@ -53,7 +74,6 @@ function App() {
     //     localStorage.setItem("counterValue", JSON.stringify(counter))
     // }
 
-
     function setMaxValueFunction(value: number) {
         setMaxValue(value)
     }
@@ -62,16 +82,46 @@ function App() {
         setStartValue(value)
     }
 
+    function setIsDisabledFunc() {
+        setIsDisabled(false)
+    }
+
+    const Validation = () => {
+        if (startValue < 0){
+            setIsValidated(false)
+            setIsValidatedStartValueField(false)
+        }
+        if (maxValue < 0 && maxValue < startValue){
+            setIsValidated(false)
+            setIsValidatedMaxValueField(false)
+        }
+    }
+
     return (
         <div className="App">
             <SettingsMenu
+                counter={counter}
                 startValue={startValue}
                 setStartValueFunc={setStartValueFunction}
                 maxValue={maxValue}
                 setMaxValueFunc={setMaxValueFunction}
                 setCounterValueFunc={setCounterValueFunc}
+                isDisabled={isDisabled}
+                setIsDisabledFunc={setIsDisabledFunc}
+                isValidated={isValidated}
+                isValidatedStartValueField={isValidatedStartValueField}
+                isValidatedMaxValueField={isValidatedMaxValueField}
             />
-            <CounterMenu counter={counter} incrementCounter={incrementCounter} resetCounter={resetCounter} startValue={startValue} maxValue={maxValue}/>
+            <CounterMenu
+                counter={counter}
+                incrementCounter={incrementCounter}
+                resetCounter={resetCounter}
+                startValue={startValue}
+                maxValue={maxValue}
+                isDisabled={isDisabled}
+                setIsDisabledFunc={setIsDisabledFunc}
+                isValidated={isValidated}
+            />
         </div>
     );
 }

@@ -5,13 +5,13 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    font-size: 22px;
+    font-size: 20px;
     color: white;
     overflow: initial;
 }
 
 .wrapper {
-    width: 440px;
+    width: 500px;
     border-radius: 20px;
     display: flex;
     flex-direction: column;
@@ -26,9 +26,9 @@
 .counter {
     background-color: aqua;
     display: flex;
-    align-items: center;
     justify-content: center;
-    width: 350px;
+    align-items: center;
+    width: 400px;
     height: 250px;
     border: cornflowerblue solid 2px;
     border-radius: 20px;
@@ -40,7 +40,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    width: 350px;
+    width: 400px;
     height: 250px;
     border: cornflowerblue solid 2px;
     border-radius: 20px;
@@ -48,7 +48,7 @@
 }
 
 .buttonSection {
-    width: 360px;
+    width: 400px;
     min-height: 90px;
     overflow: initial;
     display: flex;
@@ -73,7 +73,7 @@ button {
 button:active {
     background-color: cornflowerblue;
     box-shadow: 0 5px #666;
-    transform: translateY(4px);
+    transform: translateY(3px);
 }
 
 div {
@@ -81,6 +81,13 @@ div {
 }
 .number-style {
     color: red;
+}
+.invalidInput{
+    color: red;
+}
+
+.isValidatedField{
+
 }
 .isActive{
     opacity: 0.4;
