@@ -1,34 +1,77 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './App.css';
 import Counter from "./Counter";
 import Button from "./Button";
+import SettingsMenu from "./SettingsMenu";
+import CounterMenu from "./CounterMenu";
 
 function App() {
 
-    let initialValue = 0;
-    let [counter, setCounter] = useState(initialValue);
+    let [startValue, setStartValue] = useState(0)
 
-    const incrementFunction =  () => {
+    let [maxValue, setMaxValue] = useState(0)
+    let [counter, setCounter] = useState(0);
+
+    useEffect(() => {
+        let valueAsString = localStorage.getItem("startValue")
+        if (valueAsString) {
+            let valueAsNumber = JSON.parse(valueAsString)
+            setCounter(valueAsNumber)
+        }
+    }, [])
+
+    useEffect(() => {
+        localStorage.setItem("startValue", JSON.stringify(startValue))
+        localStorage.setItem("maxValue", JSON.stringify(maxValue))
+    }, [startValue, maxValue])
+
+    const setCounterValueFunc = (value:number )=>{
+        setCounter(value)
+    }
+    const incrementCounter = () => {
         setCounter(counter + 1)
     }
-    const resetFunction = () => {
-        setCounter(initialValue)
+    const resetCounter = () => {
+        setCounter(startValue)
     }
 
-    let incButtonDisabled = counter > 4;
-    let resetButtonDisabled = counter == 0;
+    // const getFromLocalStorage = () => {
+    //     let valueAsString = localStorage.getItem("counterValue")
+    //     if (valueAsString) {
+    //         let valueAsNumber = JSON.parse(valueAsString)
+    //         setCounter(valueAsNumber)
+    //     }
+    // }
+    // const clearLocalStorage = () => {
+    //     localStorage.clear()
+    //     setCounter(0)
+    // }
+    // const removeItemFromLocalStorage = () => {
+    //     localStorage.removeItem("counterValue")
+    // }
+    // const setToLocalStorage = () => {
+    //     localStorage.setItem("counterValue", JSON.stringify(counter))
+    // }
+
+
+    function setMaxValueFunction(value: number) {
+        setMaxValue(value)
+    }
+
+    function setStartValueFunction(value: number) {
+        setStartValue(value)
+    }
 
     return (
         <div className="App">
-                <div className={"wrapper"}>
-                    <div className={"counter"}>
-                        <Counter counter={counter}/>
-                    </div>
-                    <div className={"buttonSection"}>
-                        <Button title={"inc"} actionFunction = {incrementFunction} isDisabled = {incButtonDisabled}/>
-                        <Button title={"reset"} actionFunction = {resetFunction} isDisabled = {resetButtonDisabled}/>
-                    </div>
-                </div>
+            <SettingsMenu
+                startValue={startValue}
+                setStartValueFunc={setStartValueFunction}
+                maxValue={maxValue}
+                setMaxValueFunc={setMaxValueFunction}
+                setCounterValueFunc={setCounterValueFunc}
+            />
+            <CounterMenu counter={counter} incrementCounter={incrementCounter} resetCounter={resetCounter} startValue={startValue} maxValue={maxValue}/>
         </div>
     );
 }

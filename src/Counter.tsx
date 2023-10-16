@@ -4,11 +4,14 @@ import './App.css';
 
 type CounterPropsType = {
     counter: number
+    startValue: number
+    maxValue:number
 }
-const Counter:  React.FC<CounterPropsType>= ({counter}) => {
+const Counter:  React.FC<CounterPropsType>= ({counter, maxValue, startValue}) => {
+
     return (
         <div >
-            <h1 className={counter === 5 ? "number-style": ""}>{counter}</h1>
+            <h1 className={counter === maxValue && counter != startValue ? "number-style": ""}>{counter}</h1>
         </div>
     );
 };

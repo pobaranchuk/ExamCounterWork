@@ -2,7 +2,7 @@ import React from 'react';
 
 type ButtonPropsType = {
     title: string
-    isDisabled: boolean
+    isDisabled?: boolean
     actionFunction: () => void
 }
 
