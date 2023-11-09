@@ -11,6 +11,8 @@ type MenuPropsType = {
     startValue: number
     isDisabled: boolean
     isValidated: boolean
+    isSetSet: boolean
+    setIsSetSet: (value: boolean) => void
 }
 
 const CounterMenu: React.FC<MenuPropsType> = ({
@@ -20,11 +22,18 @@ const CounterMenu: React.FC<MenuPropsType> = ({
                                                   maxValue,
                                                   startValue,
                                                   isDisabled,
-                                                  isValidated
+                                                  isValidated,
+                                                  isSetSet,
+                                                  setIsSetSet
                                               }) => {
 
     let incButtonDisabled = counter < maxValue;
     let resetButtonDisabled = counter <= startValue;
+
+    const switchMenu = () => {
+        setIsSetSet(!isSetSet)
+    }
+
     return (
         <div className={"wrapper"}>
             <div className={"counter"}>
@@ -33,6 +42,7 @@ const CounterMenu: React.FC<MenuPropsType> = ({
             <div className={"buttonSection"}>
                 <Button title={"inc"} actionFunction={incrementCounter} isDisabled={!incButtonDisabled}/>
                 <Button title={"reset"} actionFunction={resetCounter} isDisabled={resetButtonDisabled}/>
+                <Button title={"set"} actionFunction={switchMenu}/>
             </div>
         </div>
     );

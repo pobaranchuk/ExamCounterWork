@@ -5,6 +5,8 @@ import CounterMenu from "./CounterMenu";
 
 function App() {
 
+    let [isSetSet, setIsSetSet] = useState(false)
+
     let [startValue, setStartValue] = useState(0)
     let [maxValue, setMaxValue] = useState(0)
 
@@ -81,32 +83,37 @@ function App() {
         setIsDisabled(value)
     }
 
-    function setIsValidatedFunc(value: boolean){
+    function setIsValidatedFunc(value: boolean) {
         setIsValidated(value)
     }
 
     return (
         <div className="App">
-            <SettingsMenu
-                counter={counter}
-                startValue={startValue}
-                setStartValueFunc={setStartValueFunction}
-                maxValue={maxValue}
-                setMaxValueFunc={setMaxValueFunction}
-                setCounterValueFunc={setCounterValueFunc}
-                isDisabled={isDisabled}
-                setIsDisabledFunc={setIsDisabledFunc}
-                setIsValidatedFunc={setIsValidatedFunc}
-            />
-            <CounterMenu
-                counter={counter}
-                incrementCounter={incrementCounter}
-                resetCounter={resetCounter}
-                startValue={startValue}
-                maxValue={maxValue}
-                isDisabled={isDisabled}
-                isValidated={isValidated}
-            />
+            {isSetSet ?
+                <SettingsMenu
+                    startValue={startValue}
+                    setStartValueFunc={setStartValueFunction}
+                    maxValue={maxValue}
+                    setMaxValueFunc={setMaxValueFunction}
+                    setCounterValueFunc={setCounterValueFunc}
+                    isDisabled={isDisabled}
+                    setIsDisabledFunc={setIsDisabledFunc}
+                    setIsValidatedFunc={setIsValidatedFunc}
+                    isSetSet={isSetSet}
+                    setIsSetSet={setIsSetSet}
+                /> :
+                <CounterMenu
+                    counter={counter}
+                    incrementCounter={incrementCounter}
+                    resetCounter={resetCounter}
+                    startValue={startValue}
+                    maxValue={maxValue}
+                    isDisabled={isDisabled}
+                    isValidated={isValidated}
+                    isSetSet={isSetSet}
+                    setIsSetSet={setIsSetSet}
+                />
+            }
         </div>
     );
 }

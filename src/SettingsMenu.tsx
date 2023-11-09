@@ -2,7 +2,6 @@ import React, {ChangeEvent, useState} from 'react';
 import Button from "./Button";
 
 type MenuPropsType = {
-    counter: number
     maxValue: number
     startValue: number
     setMaxValueFunc: (value: number) => void
@@ -11,10 +10,11 @@ type MenuPropsType = {
     isDisabled: boolean
     setIsDisabledFunc: (value: boolean) => void
     setIsValidatedFunc: (value: boolean) => void
+    isSetSet: boolean
+    setIsSetSet: (value: boolean) => void
 }
 
 export const SettingsMenu: React.FC<MenuPropsType> = ({
-                                                          counter,
                                                           maxValue,
                                                           startValue,
                                                           setStartValueFunc,
@@ -23,6 +23,8 @@ export const SettingsMenu: React.FC<MenuPropsType> = ({
                                                           setIsDisabledFunc,
                                                           isDisabled,
                                                           setIsValidatedFunc,
+                                                          isSetSet,
+                                                          setIsSetSet
                                                       }) => {
 
     let [isValidatedStartValueField, setIsValidatedStartValueField] = useState(true)
@@ -45,7 +47,7 @@ export const SettingsMenu: React.FC<MenuPropsType> = ({
     }
 
     const onStartValueChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        if (Number(e.currentTarget.value) < maxValue && Number(e.currentTarget.value) > 0) {
+        if (Number(e.currentTarget.value) < maxValue && Number(e.currentTarget.value) >= 0) {
             setIsValidatedFunc(true)
             setIsValidatedStartValueField(true)
             setIsDisabledFunc(false)
@@ -63,6 +65,8 @@ export const SettingsMenu: React.FC<MenuPropsType> = ({
     const SetValues = () => {
         setCounterValueFunc(startValue)
         setIsDisabledFunc(false)
+
+        setIsSetSet(!isSetSet)
     }
 
     return (
