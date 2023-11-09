@@ -1,7 +1,5 @@
 import React, {ChangeEvent, useState} from 'react';
-import Counter from "./Counter";
 import Button from "./Button";
-import counter from "./Counter";
 
 type MenuPropsType = {
     counter: number
@@ -31,31 +29,37 @@ export const SettingsMenu: React.FC<MenuPropsType> = ({
     let [isValidatedMaxValueField, setIsValidatedMaxValueField] = useState(true)
 
     const onMaxValueChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        if (Number(e.currentTarget.value) <= startValue || Number(e.currentTarget.value) < 0) {
-            setIsValidatedFunc(false)
-            setIsValidatedMaxValueField(false)
-            setIsDisabledFunc(true)
-        } else {
+        if (Number(e.currentTarget.value) > startValue && Number(e.currentTarget.value) > 0) {
             setIsValidatedFunc(true)
             setIsValidatedMaxValueField(true)
             setIsDisabledFunc(false)
-        }
-        setMaxValueFunc(Number(e.currentTarget.value))
-    }
-    const onStartValueChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        if (Number(e.currentTarget.value) >= maxValue || Number(e.currentTarget.value) < 0) {
-            setIsValidatedFunc(false)
-            setIsValidatedStartValueField(false)
-            setIsDisabledFunc(true)
+
+            setMaxValueFunc(Number(e.currentTarget.value))
         } else {
+            setIsValidatedFunc(false)
+            setIsValidatedMaxValueField(false)
+            setIsDisabledFunc(true)
+
+            setMaxValueFunc(Number(e.currentTarget.value))
+        }
+    }
+
+    const onStartValueChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        if (Number(e.currentTarget.value) < maxValue && Number(e.currentTarget.value) > 0) {
             setIsValidatedFunc(true)
             setIsValidatedStartValueField(true)
             setIsDisabledFunc(false)
+
+            setStartValueFunc(Number(e.currentTarget.value))
+        } else {
+            setIsValidatedFunc(false)
+            setIsValidatedStartValueField(false)
+            setIsDisabledFunc(true)
+
+            setStartValueFunc(Number(e.currentTarget.value))
         }
-
-        setStartValueFunc(Number(e.currentTarget.value))
-
     }
+
     const SetValues = () => {
         setCounterValueFunc(startValue)
         setIsDisabledFunc(false)

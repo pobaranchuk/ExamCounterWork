@@ -45,11 +45,12 @@ function App() {
         setCounter(value)
     }
     const incrementCounter = () => {
-        setCounter(counter + 1)
+        setCounter((counter) => counter + 1)
     }
     const resetCounter = () => {
         setCounter(startValue)
     }
+
     // const getFromLocalStorage = () => {
     //     let valueAsString = localStorage.getItem("counterValue")
     //     if (valueAsString) {
