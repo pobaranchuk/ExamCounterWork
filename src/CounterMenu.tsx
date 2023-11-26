@@ -5,43 +5,41 @@ import Button from "./Button";
 
 type MenuPropsType = {
     counter: number
-    incrementCounter: () => void
-    resetCounter: () => void
-    maxValue: number
     startValue: number
-    isDisabled: boolean
-    isValidated: boolean
-    isSetSet: boolean
-    setIsSetSet: (value: boolean) => void
+    maxValue: number
+    isButtonDisabled: boolean
+    isNumberValidated: boolean
+    isConfigured: boolean
+    incrementCounterFunction: () => void
+    resetCounterFunction: () => void
+    setIsConfigured: (value: boolean) => void
 }
 
 const CounterMenu: React.FC<MenuPropsType> = ({
                                                   counter,
-                                                  incrementCounter,
-                                                  resetCounter,
-                                                  maxValue,
                                                   startValue,
-                                                  isDisabled,
-                                                  isValidated,
-                                                  isSetSet,
-                                                  setIsSetSet
+                                                  maxValue,
+                                                  isConfigured,
+                                                  incrementCounterFunction,
+                                                  resetCounterFunction,
+                                                  setIsConfigured
                                               }) => {
 
     let incButtonDisabled = counter < maxValue;
     let resetButtonDisabled = counter <= startValue;
 
     const switchMenu = () => {
-        setIsSetSet(!isSetSet)
+        setIsConfigured(!isConfigured)
     }
 
     return (
         <div className={"wrapper"}>
             <div className={"counter"}>
-                <Counter counter={counter} maxValue={maxValue} isDisabled={isDisabled} isValidated={isValidated}/>
+                <Counter counter={counter} maxValue={maxValue}/>
             </div>
             <div className={"buttonSection"}>
-                <Button title={"inc"} actionFunction={incrementCounter} isDisabled={!incButtonDisabled}/>
-                <Button title={"reset"} actionFunction={resetCounter} isDisabled={resetButtonDisabled}/>
+                <Button title={"inc"} actionFunction={incrementCounterFunction} isDisabled={!incButtonDisabled}/>
+                <Button title={"reset"} actionFunction={resetCounterFunction} isDisabled={resetButtonDisabled}/>
                 <Button title={"set"} actionFunction={switchMenu}/>
             </div>
         </div>

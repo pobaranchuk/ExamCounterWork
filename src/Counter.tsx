@@ -5,19 +5,11 @@ import './App.css';
 type CounterPropsType = {
     counter: number
     maxValue: number
-    isDisabled: boolean
-    isValidated: boolean
 }
-const Counter: React.FC<CounterPropsType> = ({
-                                                 counter,
-                                                 maxValue
-                                             }) => {
-
+const Counter: React.FC<CounterPropsType> = ({counter, maxValue}) => {
     return (
         <div>
-            {
-                <h1 className={counter === maxValue ? "number-style" : ""}>{counter}</h1>
-            }
+            <h1 className={counter === maxValue ? "number-style" : ""}>{counter}</h1>
         </div>
     );
 };

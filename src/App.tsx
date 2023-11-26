@@ -5,54 +5,69 @@ import CounterMenu from "./CounterMenu";
 
 function App() {
 
-    let [isSetSet, setIsSetSet] = useState(false)
+    let [isConfigured, setIsConfigured] = useState(false)
 
     let [startValue, setStartValue] = useState(0)
     let [maxValue, setMaxValue] = useState(0)
 
     let [counter, setCounter] = useState(0);
 
-    let [isDisabled, setIsDisabled] = useState(true)
+    let [isButtonDisabled, setIsButtonDisabled] = useState(true)
 
-    let [isValidated, setIsValidated] = useState(true)
+    let [isNumberValidated, setIsNumberValidated] = useState(true)
 
-    useEffect(() => {
-        let startValueAsString = localStorage.getItem("startValue")
-        let maxValueAsString = localStorage.getItem("maxValue")
-        let isDisabledAsString = localStorage.getItem("isDisabled")
 
-        if (startValueAsString) {
-            let startAsNumber = JSON.parse(startValueAsString)
-            setStartValue(startAsNumber)
-            setCounter(startAsNumber)
-        }
-        if (maxValueAsString) {
-            let maxValueAsNumber = JSON.parse(maxValueAsString)
-            setMaxValue(maxValueAsNumber)
-        }
-
-        if (isDisabledAsString) {
-            let booleanIsDisabled = "true"
-            setIsDisabled(isDisabledAsString === booleanIsDisabled)
-        }
-    }, [])
-
-    useEffect(() => {
-        localStorage.setItem("startValue", JSON.stringify(startValue))
-        localStorage.setItem("maxValue", JSON.stringify(maxValue))
-        localStorage.setItem("isDisabled", JSON.stringify(isDisabled))
-    }, [startValue, maxValue, isDisabled])
-
-    const setCounterValueFunc = (value: number) => {
+    const setCounterValueFunction = (value: number) => {
         setCounter(value)
     }
-    const incrementCounter = () => {
-        setCounter((counter) => counter + 1)
+    const incrementCounterFunction = () => {
+        setCounter(counter => counter + 1)
     }
-    const resetCounter = () => {
+    const resetCounterFunction = () => {
         setCounter(startValue)
     }
 
+    function setMaxValueFunction(value: number) {
+        setMaxValue(value)
+    }
+
+    function setStartValueFunction(value: number) {
+        setStartValue(value)
+    }
+
+    function setIsButtonDisabledFunction(value: boolean) {
+        setIsButtonDisabled(value)
+    }
+
+    function setIsValidatedFunction(value: boolean) {
+        setIsNumberValidated(value)
+    }
+
+    // useEffect(() => {
+    //     let startValueAsString = localStorage.getItem("startValue")
+    //     let maxValueAsString = localStorage.getItem("maxValue")
+    //     let isDisabledAsString = localStorage.getItem("isButtonDisabled")
+    //
+    //     if (startValueAsString) {
+    //         let startAsNumber = JSON.parse(startValueAsString)
+    //         setStartValue(startAsNumber)
+    //         setCounter(startAsNumber)
+    //     }
+    //     if (maxValueAsString) {
+    //         let maxValueAsNumber = JSON.parse(maxValueAsString)
+    //         setMaxValue(maxValueAsNumber)
+    //     }
+    //
+    //     if (isDisabledAsString) {
+    //         let booleanIsDisabled = "true"
+    //         setIsDisabled(isDisabledAsString === booleanIsDisabled)
+    //     }
+    // }, [])
+    // useEffect(() => {
+    //     localStorage.setItem("startValue", JSON.stringify(startValue))
+    //     localStorage.setItem("maxValue", JSON.stringify(maxValue))
+    //     localStorage.setItem("isButtonDisabled", JSON.stringify(isButtonDisabled))
+    // }, [startValue, maxValue, isButtonDisabled])
     // const getFromLocalStorage = () => {
     //     let valueAsString = localStorage.getItem("counterValue")
     //     if (valueAsString) {
@@ -71,47 +86,32 @@ function App() {
     //     localStorage.setItem("counterValue", JSON.stringify(counter))
     // }
 
-    function setMaxValueFunction(value: number) {
-        setMaxValue(value)
-    }
-
-    function setStartValueFunction(value: number) {
-        setStartValue(value)
-    }
-
-    function setIsDisabledFunc(value: boolean) {
-        setIsDisabled(value)
-    }
-
-    function setIsValidatedFunc(value: boolean) {
-        setIsValidated(value)
-    }
-
     return (
         <div className="App">
-            {isSetSet ?
-                <SettingsMenu
-                    startValue={startValue}
-                    setStartValueFunc={setStartValueFunction}
-                    maxValue={maxValue}
-                    setMaxValueFunc={setMaxValueFunction}
-                    setCounterValueFunc={setCounterValueFunc}
-                    isDisabled={isDisabled}
-                    setIsDisabledFunc={setIsDisabledFunc}
-                    setIsValidatedFunc={setIsValidatedFunc}
-                    isSetSet={isSetSet}
-                    setIsSetSet={setIsSetSet}
-                /> :
+            {isConfigured ?
                 <CounterMenu
                     counter={counter}
-                    incrementCounter={incrementCounter}
-                    resetCounter={resetCounter}
                     startValue={startValue}
                     maxValue={maxValue}
-                    isDisabled={isDisabled}
-                    isValidated={isValidated}
-                    isSetSet={isSetSet}
-                    setIsSetSet={setIsSetSet}
+                    isButtonDisabled={isButtonDisabled}
+                    isNumberValidated={isNumberValidated}
+                    isConfigured={isConfigured}
+                    incrementCounterFunction={incrementCounterFunction}
+                    resetCounterFunction={resetCounterFunction}
+                    setIsConfigured={setIsConfigured}
+                />
+                :
+                <SettingsMenu
+                    startValue={startValue}
+                    setStartValueFunction={setStartValueFunction}
+                    maxValue={maxValue}
+                    setMaxValueFunction={setMaxValueFunction}
+                    setCounterValueFunction={setCounterValueFunction}
+                    isButtonDisabled={isButtonDisabled}
+                    setIsDisabledFunction={setIsButtonDisabledFunction}
+                    setIsValidatedFunction={setIsValidatedFunction}
+                    isConfigured={isConfigured}
+                    setIsConfigured={setIsConfigured}
                 />
             }
         </div>
