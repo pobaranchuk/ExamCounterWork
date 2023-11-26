@@ -2,43 +2,57 @@ import React, {useEffect, useState} from 'react';
 import './App.css';
 import SettingsMenu from "./SettingsMenu";
 import CounterMenu from "./CounterMenu";
+import {useDispatch, useSelector} from "react-redux";
+import {
+    incrementCounterAC,
+    resetCounterAC,
+    setCounterValueFuncAC, setIsDisabledFuncAC, setIsValidatedFuncAC,
+    setMaxValueFunctionAC,
+    setStartValueFunctionAC
+} from "./state/counterReducer";
+import {RootStateType} from "./state/store";
 
 function App() {
 
-    let [startValue, setStartValue] = useState(0)
-    let [maxValue, setMaxValue] = useState(0)
+    let startValue = useSelector<RootStateType, number>(state => state.counterState.startValue)
+    let maxValue = useSelector<RootStateType, number>(state => state.counterState.maxValue)
+    let counter = useSelector<RootStateType, number>(state => state.counterState.counter)
+    let isDisabled = useSelector<RootStateType, boolean>(state => state.counterState.isDisabled)
+    let isValidated = useSelector<RootStateType, boolean>(state => state.counterState.isValidated)
 
-    let [counter, setCounter] = useState(0);
-
-    let [isDisabled, setIsDisabled] = useState(true)
-
-    let [isValidated, setIsValidated] = useState(true)
+    const dispatch = useDispatch()
 
     const setCounterValueFunc = (value: number) => {
-        setCounter(value)
+        let action = setCounterValueFuncAC(value)
+        dispatch(action)
     }
     const incrementCounter = () => {
-        setCounter((counter) => counter + 1)
+        let action = incrementCounterAC()
+        dispatch(action)
     }
     const resetCounter = () => {
-        setCounter(startValue)
+        let action = resetCounterAC()
+        dispatch(action)
     }
 
-
     function setMaxValueFunction(value: number) {
-        setMaxValue(value)
+        let action = setMaxValueFunctionAC(value)
+        dispatch(action)
     }
 
     function setStartValueFunction(value: number) {
-        setStartValue(value)
+        let action = setStartValueFunctionAC(value)
+        dispatch(action)
     }
 
     function setIsDisabledFunc(value: boolean) {
-        setIsDisabled(value)
+        let action = setIsDisabledFuncAC(value)
+        dispatch(action)
     }
 
-    function setIsValidatedFunc(value: boolean){
-        setIsValidated(value)
+    function setIsValidatedFunc(value: boolean) {
+        let action = setIsValidatedFuncAC(value)
+        dispatch(action)
     }
 
     // useEffect(() => {
