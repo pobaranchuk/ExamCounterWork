@@ -2,7 +2,6 @@ import React, {ChangeEvent, useState} from 'react';
 import Button from "./Button";
 
 type MenuPropsType = {
-    counter: number
     maxValue: number
     startValue: number
     setMaxValueFunc: (value: number) => void
@@ -14,7 +13,6 @@ type MenuPropsType = {
 }
 
 export const SettingsMenu: React.FC<MenuPropsType> = ({
-                                                          counter,
                                                           maxValue,
                                                           startValue,
                                                           setStartValueFunc,

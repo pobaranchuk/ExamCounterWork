@@ -14,33 +14,6 @@ function App() {
 
     let [isValidated, setIsValidated] = useState(true)
 
-    useEffect(() => {
-        let startValueAsString = localStorage.getItem("startValue")
-        let maxValueAsString = localStorage.getItem("maxValue")
-        let isDisabledAsString = localStorage.getItem("isDisabled")
-
-        if (startValueAsString) {
-            let startAsNumber = JSON.parse(startValueAsString)
-            setStartValue(startAsNumber)
-            setCounter(startAsNumber)
-        }
-        if (maxValueAsString) {
-            let maxValueAsNumber = JSON.parse(maxValueAsString)
-            setMaxValue(maxValueAsNumber)
-        }
-
-        if (isDisabledAsString) {
-            let booleanIsDisabled = "true"
-            setIsDisabled(isDisabledAsString === booleanIsDisabled)
-        }
-    }, [])
-
-    useEffect(() => {
-        localStorage.setItem("startValue", JSON.stringify(startValue))
-        localStorage.setItem("maxValue", JSON.stringify(maxValue))
-        localStorage.setItem("isDisabled", JSON.stringify(isDisabled))
-    }, [startValue, maxValue, isDisabled])
-
     const setCounterValueFunc = (value: number) => {
         setCounter(value)
     }
@@ -51,6 +24,49 @@ function App() {
         setCounter(startValue)
     }
 
+
+    function setMaxValueFunction(value: number) {
+        setMaxValue(value)
+    }
+
+    function setStartValueFunction(value: number) {
+        setStartValue(value)
+    }
+
+    function setIsDisabledFunc(value: boolean) {
+        setIsDisabled(value)
+    }
+
+    function setIsValidatedFunc(value: boolean){
+        setIsValidated(value)
+    }
+
+    // useEffect(() => {
+    //     let startValueAsString = localStorage.getItem("startValue")
+    //     let maxValueAsString = localStorage.getItem("maxValue")
+    //     let isDisabledAsString = localStorage.getItem("isDisabled")
+    //
+    //     if (startValueAsString) {
+    //         let startAsNumber = JSON.parse(startValueAsString)
+    //         setStartValue(startAsNumber)
+    //         setCounter(startAsNumber)
+    //     }
+    //     if (maxValueAsString) {
+    //         let maxValueAsNumber = JSON.parse(maxValueAsString)
+    //         setMaxValue(maxValueAsNumber)
+    //     }
+    //
+    //     if (isDisabledAsString) {
+    //         let booleanIsDisabled = "true"
+    //         setIsDisabled(isDisabledAsString === booleanIsDisabled)
+    //     }
+    // }, [])
+    //
+    // useEffect(() => {
+    //     localStorage.setItem("startValue", JSON.stringify(startValue))
+    //     localStorage.setItem("maxValue", JSON.stringify(maxValue))
+    //     localStorage.setItem("isDisabled", JSON.stringify(isDisabled))
+    // }, [startValue, maxValue, isDisabled])
     // const getFromLocalStorage = () => {
     //     let valueAsString = localStorage.getItem("counterValue")
     //     if (valueAsString) {
@@ -69,26 +85,10 @@ function App() {
     //     localStorage.setItem("counterValue", JSON.stringify(counter))
     // }
 
-    function setMaxValueFunction(value: number) {
-        setMaxValue(value)
-    }
-
-    function setStartValueFunction(value: number) {
-        setStartValue(value)
-    }
-
-    function setIsDisabledFunc(value: boolean) {
-        setIsDisabled(value)
-    }
-
-    function setIsValidatedFunc(value: boolean){
-        setIsValidated(value)
-    }
 
     return (
         <div className="App">
             <SettingsMenu
-                counter={counter}
                 startValue={startValue}
                 setStartValueFunc={setStartValueFunction}
                 maxValue={maxValue}
